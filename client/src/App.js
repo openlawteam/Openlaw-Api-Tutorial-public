@@ -5,6 +5,7 @@ import { Container,Grid, Button, Form} from 'semantic-ui-react';
 import { APIClient, Openlaw } from 'openlaw';
 import "./App.css";
     
+     //PLEASE SUPPLY YOUR OWN LOGIN CREDENTIALS and TEMPLATE NAME FOR OPENLAW
     const URL = "https://app.openlaw.io";  //url for your openlaw instance eg. "http://myinstancename.openlaw.io"
     const TEMPLATE_NAME = "OpenLaw API Tutorial Sale Agreement"; //name of template stored on Openlaw
     const OPENLAW_USER = 'myemail@example.com'; //add your Openlaw login email
@@ -137,28 +138,34 @@ previewTemplate = async (event) => {
   };
 /*converts an email address into an object, to be used with uploadDraft
 or upLoadContract methods from the APIClient.
-Eventually this function will no longer be needed. */
-  convertUserObject = (original) => {
-    const object = {
-      id: {
-        id: original.id
-      },
-      email: original.email,
-      identifiers: [
-        {
-          identityProviderId: "openlaw",
-          identifier: original.identifiers[0].id
-        }
-      ]
-    }
-    return object;
-  }
+as of " OpenLaw v.0.1.29" this function convertUserObject is no longer  needed. */
+
+  // convertUserObject = (original) => {
+  //   const object = {
+  //     id: {
+  //       id: original.id
+  //     },
+  //     email: original.email,
+  //     identifiers: [
+  //       {
+  //         identityProviderId: "openlaw",
+  //         identifier: original.identifiers[0].id
+  //       }
+  //     ]
+  //   }
+  //   return object;
+  // }
 
 /*Build Open Law Params to Submit for Upload Contract*/
-  buildOpenLawParamsObj = async (myTemplate, creatorId) => {
 
-    const sellerUser = await apiClient.getUserDetails(this.state.sellerEmail);
-    const buyerUser = await apiClient.getUserDetails(this.state.buyerEmail);
+  buildOpenLawParamsObj = async (myTemplate, creatorId) => {
+    /*
+       -  getUserDetails() is deprecated as of OpenLaw "0.1.28"
+       -  no longer need const sellerUser and const buyerUser
+        - no longer need JSON.stringify(this.convertUserObject())
+    */ 
+    //const sellerUser = await apiClient.getUserDetails(this.state.sellerEmail);
+    //const buyerUser = await apiClient.getUserDetails(this.state.buyerEmail);
 
     const object = {
       templateId: myTemplate.id,
@@ -170,8 +177,8 @@ Eventually this function will no longer be needed. */
         "Buyer Address": this.state.buyer,
         "Purchased Item": this.state.descr,
         "Purchase Price": this.state.price,
-        "Seller Signatory Email": JSON.stringify(this.convertUserObject(sellerUser)),
-        "Buyer Signatory Email": JSON.stringify(this.convertUserObject(buyerUser)),
+        "Seller Signatory Email": this.state.sellerEmail,//JSON.stringify(this.convertUserObject(sellerUser)),
+        "Buyer Signatory Email": this.state.buyerEmail,//JSON.stringify(this.convertUserObject(buyerUser)),
       },
       overriddenParagraphs: {},
       agreements: {},
