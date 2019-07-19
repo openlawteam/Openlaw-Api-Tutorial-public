@@ -8,7 +8,7 @@ import "./App.css";
      //PLEASE SUPPLY YOUR OWN LOGIN CREDENTIALS and TEMPLATE NAME FOR OPENLAW
     const URL = "https://app.openlaw.io";  //url for your openlaw instance eg. "http://myinstancename.openlaw.io"
     const TEMPLATE_NAME = "OpenLaw API Tutorial Sale Agreement"; //name of template stored on Openlaw
-    const OPENLAW_USER = 'myemail@example.com'; //add your Openlaw login email
+    const OPENLAW_USER = 'email@example.com'; //add your Openlaw login email
     const OPENLAW_PASSWORD = 'password here!' //add your Openlaw password
     //create config 
     const openLawConfig = {
@@ -76,6 +76,13 @@ class App extends Component {
     const myContent = myTemplate.content;
     this.setState({myTemplate});
     console.log('myTemplate..',myTemplate);
+
+     const contractId =  myTemplate.id;
+    console.log("contract id..",contractId);
+
+    //TEST this function ?
+    //   apiClient.getAccessToken(contractId)
+    // .then(({ data }) => console.log(data));
 
     //Get the most recent version of the OpenLaw API Tutorial Template
     const versions = await apiClient.getTemplateVersions(openLawConfig.templateName, 20, 1);
