@@ -6,7 +6,7 @@ import { APIClient, Openlaw } from 'openlaw';
 import "./App.css";
     
      //PLEASE SUPPLY YOUR OWN LOGIN CREDENTIALS and TEMPLATE NAME FOR OPENLAW
-    const URL = "https://app.openlaw.io";  //url for your openlaw instance eg. "http://myinstancename.openlaw.io"
+    const URL = "https://lib.openlaw.io/api/v1/default";  //url for your openlaw instance eg. "http://lib.openlaw.io"
     const TEMPLATE_NAME = "OpenLaw API Tutorial Sale Agreement"; //name of template stored on Openlaw
     const OPENLAW_USER = 'email@example.com'; //add your Openlaw login email
     const OPENLAW_PASSWORD = 'password here!' //add your Openlaw password
